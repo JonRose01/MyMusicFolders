@@ -12,6 +12,24 @@
     "main": {
       "type": "product-information",
       "blocks": {
+        "disclosures": {
+          "type": "disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h4",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h5",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -25,6 +43,7 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "bottom",
             "thumbnail_width": 72,
+            "thumbnail_radius": 0,
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
@@ -53,11 +72,13 @@
             "gap": 20,
             "sticky_details_desktop": true,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 24,
             "padding-block-end": 24,
@@ -84,6 +105,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "background_media": "none",
+                "background_color": "",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "toggle_overlay": false,
@@ -93,6 +115,7 @@
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
+                "border_color": "",
                 "border_radius": 0,
                 "link": "",
                 "open_in_new_tab": false,
@@ -103,6 +126,13 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "crumbs": {
+                  "type": "custom-liquid",
+                  "settings": {
+                    "custom_liquid": "{%- liquid\n  assign crumb_coll = collection\n  if crumb_coll == blank\n    assign crumb_coll = product.collections | where: 'handle', 'choral-folders' | first\n    if crumb_coll == blank\n      assign crumb_coll = product.collections | where: 'handle', 'instrumental-folders' | first\n    endif\n    if crumb_coll == blank\n      assign crumb_coll = product.collections | first\n    endif\n  endif\n-%}\n<nav class=\"mmf-crumbs\" aria-label=\"Breadcrumb\"><a href=\"{{ routes.root_url }}\">Home</a><span aria-hidden=\"true\">/</span>{% if crumb_coll %}<a href=\"{{ crumb_coll.url }}\">{{ crumb_coll.title | escape }}</a><span aria-hidden=\"true\">/</span>{% endif %}<span aria-current=\"page\">{{ product.title | escape }}</span></nav>\n<style>.mmf-crumbs{font-size:.8125rem;display:flex;flex-wrap:wrap;gap:6px;opacity:.8}.mmf-crumbs a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style>"
+                  },
+                  "blocks": {}
+                },
                 "text_xpVMaM": {
                   "type": "text",
                   "name": "t:names.title",
@@ -118,6 +148,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
+                    "text_color": "",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -125,6 +156,20 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "vendor": {
+                  "type": "custom-liquid",
+                  "settings": {
+                    "custom_liquid": "<p style=\"margin:0\"><a href=\"{{ product.vendor | url_for_vendor }}\" style=\"color:inherit;text-decoration:underline;text-underline-offset:2px\">{{ product.vendor | escape }}</a></p>"
+                  },
+                  "blocks": {}
+                },
+                "sa_stars": {
+                  "type": "custom-liquid",
+                  "settings": {
+                    "custom_liquid": "<div id=\"product_just_stars\" class=\"reg\"></div>"
                   },
                   "blocks": {}
                 },
@@ -142,6 +187,7 @@
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
+                    "text_color": "",
                     "padding-block-start": 4,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -149,24 +195,21 @@
                   },
                   "blocks": {}
                 },
-                "crumbs": {
-                  "type": "custom-liquid",
-                  "settings": {
-                    "custom_liquid": "{%- liquid\n  assign crumb_coll = collection\n  if crumb_coll == blank\n    assign crumb_coll = product.collections | where: 'handle', 'choral-folders' | first\n    if crumb_coll == blank\n      assign crumb_coll = product.collections | where: 'handle', 'instrumental-folders' | first\n    endif\n    if crumb_coll == blank\n      assign crumb_coll = product.collections | first\n    endif\n  endif\n-%}\n<nav class=\"mmf-crumbs\" aria-label=\"Breadcrumb\"><a href=\"{{ routes.root_url }}\">Home</a><span aria-hidden=\"true\">/</span>{% if crumb_coll %}<a href=\"{{ crumb_coll.url }}\">{{ crumb_coll.title | escape }}</a><span aria-hidden=\"true\">/</span>{% endif %}<span aria-current=\"page\">{{ product.title | escape }}</span></nav>\n<style>.mmf-crumbs{font-size:.8125rem;display:flex;flex-wrap:wrap;gap:6px;opacity:.8}.mmf-crumbs a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style>"
-                  },
-                  "blocks": {}
-                },
-                "vendor": {
-                  "type": "custom-liquid",
-                  "settings": {
-                    "custom_liquid": "<p style=\"margin:0\"><a href=\"{{ product.vendor | url_for_vendor }}\" style=\"color:inherit;text-decoration:underline;text-underline-offset:2px\">{{ product.vendor | escape }}</a></p>"
-                  },
-                  "blocks": {}
-                },
                 "sku": {
                   "type": "sku",
                   "settings": {
-                    "type_preset": "paragraph"
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -184,21 +227,14 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
+                    "text_color": "",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "text_color": ""
-                  },
-                  "blocks": {}
-                },
-                "sa_stars": {
-                  "type": "custom-liquid",
-                  "settings": {
-                    "custom_liquid": "<div id=\"product_just_stars\" class=\"reg\"></div>"
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -231,6 +267,15 @@
               "settings": {
                 "variant_style": "buttons",
                 "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -239,41 +284,6 @@
               },
               "blocks": {}
             },
-            "buy_buttons_eYQEYi": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": true,
-                "show_pickup_availability": false,
-                "gift_card_form": true,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
-                  "settings": {
-                    "style_class": "button"
-                  },
-                  "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                }
-              },
-              "block_order": []
-            },
             "mmf_embossing": {
               "type": "mmf-embossing",
               "settings": {
@@ -281,7 +291,8 @@
                 "lead_time": "Please allow up to two weeks for embossing.",
                 "padding-block-start": 4,
                 "padding-block-end": 0
-              }
+              },
+              "blocks": {}
             },
             "inventory": {
               "type": "product-inventory",
@@ -296,10 +307,70 @@
               },
               "blocks": {}
             },
-            "share": {
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "trust": {
               "type": "custom-liquid",
               "settings": {
-                "custom_liquid": "<div class=\"mmf-share\" aria-label=\"Share this product\">\n  {%- assign u = shop.url | append: product.url | url_encode -%}{%- assign tt = product.title | url_encode -%}\n  <span>Share:</span>\n  <a href=\"https://www.facebook.com/sharer/sharer.php?u={{ u }}\" target=\"_blank\" rel=\"noopener\">Facebook</a>\n  <a href=\"https://twitter.com/intent/tweet?url={{ u }}&text={{ tt }}\" target=\"_blank\" rel=\"noopener\">X</a>\n  <a href=\"https://www.pinterest.com/pin/create/button/?url={{ u }}&description={{ tt }}\" target=\"_blank\" rel=\"noopener\">Pinterest</a>\n  <a href=\"https://www.linkedin.com/sharing/share-offsite/?url={{ u }}\" target=\"_blank\" rel=\"noopener\">LinkedIn</a>\n  <a href=\"mailto:?subject={{ tt }}&body={{ u }}\">Email</a>\n</div>\n<style>.mmf-share{display:flex;flex-wrap:wrap;gap:14px;font-size:.875rem;align-items:center}.mmf-share a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style>\n<style>.shopify-payment-button__button--unbranded,.shopify-payment-button__more-options{display:none!important}</style>"
+                "custom_liquid": "<ul class=\"mmf-trust\" role=\"list\">\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 3-6.7\"/><path d=\"M3 4v5h5\"/></svg><span><a href=\"/policies/refund-policy\">30-day returns</a> on plain folders &amp; accessories</span></li>\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4\" y=\"11\" width=\"16\" height=\"10\" rx=\"1\"/><path d=\"M8 11V7a4 4 0 0 1 8 0v4\"/></svg><span>Secure, encrypted checkout</span></li>\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z\"/></svg><span><a href=\"https://www.shopperapproved.com/reviews/mymusicfolders.com\" target=\"_blank\" rel=\"noopener\">Thousands of 5-star reviews</a> on Shopper Approved</span></li>\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2\"/></svg><span>Questions? <a href=\"tel:+18882660731\">Call 888-266-0731</a></span></li>\n</ul>\n<style>\n  .mmf-trust{list-style:none;margin:0;padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;background:#F4F4F2;font-size:.8125rem;line-height:1.3}\n  .mmf-trust li{display:flex;align-items:center;gap:8px}\n  .mmf-trust svg{flex:0 0 auto;color:#000}\n  .mmf-trust a{color:inherit;text-decoration:underline;text-underline-offset:2px}\n  @media (max-width:420px){.mmf-trust{grid-template-columns:1fr}}\n</style>"
               },
               "blocks": {}
             },
@@ -310,10 +381,10 @@
               },
               "blocks": {}
             },
-            "trust": {
+            "share": {
               "type": "custom-liquid",
               "settings": {
-                "custom_liquid": "<ul class=\"mmf-trust\" role=\"list\">\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 3-6.7\"/><path d=\"M3 4v5h5\"/></svg><span><a href=\"/policies/refund-policy\">30-day returns</a> on plain folders &amp; accessories</span></li>\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4\" y=\"11\" width=\"16\" height=\"10\" rx=\"1\"/><path d=\"M8 11V7a4 4 0 0 1 8 0v4\"/></svg><span>Secure, encrypted checkout</span></li>\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z\"/></svg><span><a href=\"https://www.shopperapproved.com/reviews/mymusicfolders.com\" target=\"_blank\" rel=\"noopener\">Thousands of 5-star reviews</a> on Shopper Approved</span></li>\n  <li><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2\"/></svg><span>Questions? <a href=\"tel:+18882660731\">Call 888-266-0731</a></span></li>\n</ul>\n<style>\n  .mmf-trust{list-style:none;margin:0;padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;background:#F4F4F2;font-size:.8125rem;line-height:1.3}\n  .mmf-trust li{display:flex;align-items:center;gap:8px}\n  .mmf-trust svg{flex:0 0 auto;color:#000}\n  .mmf-trust a{color:inherit;text-decoration:underline;text-underline-offset:2px}\n  @media (max-width:420px){.mmf-trust{grid-template-columns:1fr}}\n</style>"
+                "custom_liquid": "<div class=\"mmf-share\" aria-label=\"Share this product\">\n  {%- assign u = shop.url | append: product.url | url_encode -%}{%- assign tt = product.title | url_encode -%}\n  <span>Share:</span>\n  <a href=\"https://www.facebook.com/sharer/sharer.php?u={{ u }}\" target=\"_blank\" rel=\"noopener\">Facebook</a>\n  <a href=\"https://twitter.com/intent/tweet?url={{ u }}&text={{ tt }}\" target=\"_blank\" rel=\"noopener\">X</a>\n  <a href=\"https://www.pinterest.com/pin/create/button/?url={{ u }}&description={{ tt }}\" target=\"_blank\" rel=\"noopener\">Pinterest</a>\n  <a href=\"https://www.linkedin.com/sharing/share-offsite/?url={{ u }}\" target=\"_blank\" rel=\"noopener\">LinkedIn</a>\n  <a href=\"mailto:?subject={{ tt }}&body={{ u }}\">Email</a>\n</div>\n<style>.mmf-share{display:flex;flex-wrap:wrap;gap:14px;font-size:.875rem;align-items:center}.mmf-share a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style>\n<style>.shopify-payment-button__button--unbranded,.shopify-payment-button__more-options{display:none!important}</style>"
               },
               "blocks": {}
             }
@@ -324,19 +395,11 @@
             "variant_picker_R3rGDr",
             "mmf_embossing",
             "inventory",
-            "addons",
             "buy_buttons_eYQEYi",
             "trust",
+            "addons",
             "share"
           ]
-        },
-        "disclosures": {
-          "type": "disclosures",
-          "settings": {
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          },
-          "blocks": {}
         }
       },
       "block_order": [
@@ -348,9 +411,10 @@
         "equal_columns": false,
         "limit_details_width": false,
         "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "",
         "padding-block-start": 0,
-        "padding-block-end": 0,
-        "enable_sticky_add_to_cart": true
+        "padding-block-end": 0
       }
     },
     "product_tabs_mmf": {
@@ -391,6 +455,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -407,9 +472,11 @@
           "static": true,
           "settings": {
             "product_card_gap": 8,
+            "background_color": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 8,
@@ -425,6 +492,7 @@
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
+                "border_color": "",
                 "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -447,6 +515,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -471,6 +540,7 @@
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
+                "text_color": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -504,6 +574,7 @@
         "icons_shape": "none",
         "section_width": "page-width",
         "gap": 28,
+        "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
       }
