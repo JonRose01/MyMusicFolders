@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "mmf-educator-pricing",
+      "settings": {
+        "apply_url": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": ["main"]
+}
