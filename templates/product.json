@@ -237,6 +237,20 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "mmf_bulk_pricing": {
+                  "type": "mmf-bulk-pricing",
+                  "settings": {
+                    "tag": "bulk-pricing",
+                    "heading": "Buy more, save more",
+                    "col_quantity": "Folders in your order",
+                    "col_saving": "You save",
+                    "tiers": "20 to 39 | 2% off\n40 to 59 | 4% off\n60 to 79 | 6% off\n80 to 99 | 8% off\n100 or more | 10% off",
+                    "note": "Mix and match any folders that show this table to reach a tier. Your discount is applied automatically.",
+                    "padding-block-start": 12,
+                    "padding-block-end": 0
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -246,7 +260,8 @@
                 "sa_stars",
                 "price_tVjtKg",
                 "sku",
-                "bulk"
+                "bulk",
+                "mmf_bulk_pricing"
               ]
             },
             "divider_VJhene": {
